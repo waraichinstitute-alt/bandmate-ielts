@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --production
 COPY . .
-# Back4App Containers routes external traffic to port 80
-ENV PORT=80
-EXPOSE 80
+# Hugging Face Spaces route traffic to port 7860
+ENV PORT=7860
+EXPOSE 7860
 CMD ["npm", "start"]
