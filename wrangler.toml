@@ -1,0 +1,14 @@
+name = "bandmate-ielts"
+main = "src/worker.js"
+compatibility_date = "2026-09-19"
+
+[[durable_objects.bindings]]
+name = "HUB"
+class_name = "BandMateHub"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["BandMateHub"]
+
+[assets]
+directory = "./public"
