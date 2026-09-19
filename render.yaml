@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: bandmate-ielts
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    # Render sets PORT automatically; server.js already respects process.env.PORT

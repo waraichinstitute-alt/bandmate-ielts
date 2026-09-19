@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BandMate — The daily speaking gym for IELTS</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">🎙️ BandMate</div>
+  <div class="topbar-right"><span id="streakBadge" class="streak-badge hidden">🔥 <span id="streakCount">0</span></span></div>
+</header>
+
+<main id="app">
+
+  <!-- PROFILE SETUP -->
+  <section id="view-setup" class="view">
+    <div class="card narrow">
+      <h1>Set up your profile</h1>
+      <p class="muted">This is stored only in your browser for now — no account needed for the MVP.</p>
+      <label>Your name
+        <input id="inpName" type="text" maxlength="40" placeholder="e.g. Simran">
+      </label>
+      <div class="row">
+        <label>Your level
+          <select id="selBand"></select>
+        </label>
+        <label>Target band
+          <select id="selTarget"></select>
+        </label>
+      </div>
+      <button id="btnSaveProfile" class="btn primary big">Continue</button>
+    </div>
+  </section>
+
+  <!-- LOBBY -->
+  <section id="view-lobby" class="view hidden">
+    <div class="card narrow">
+      <h1 id="lobbyHello">Ready to practice?</h1>
+      <p class="muted">Pick a session type and get matched with a partner near your level.</p>
+
+      <label>Session type
+        <select id="selMode">
+          <option value="full">Full mock test — Parts 1, 2 &amp; 3 (~20 min)</option>
+          <option value="quick">Quick practice — Parts 2 &amp; 3 (~12 min)</option>
+          <option value="part1">Part 1 interview only (~8 min)</option>
+        </select>
+      </label>
+
+      <label>Topic preference
+        <select id="selTopic">
+          <option value="any">Any topic (surprise me)</option>
+          <option>Technology</option><option>Travel</option><option>Education</option>
+          <option>Environment</option><option>Work</option><option>Culture</option><option>Hometown</option>
+        </select>
+      </label>
+
+      <label class="check"><input type="checkbox" id="chkAudioOnly"> Audio-only (camera off)</label>
+
+      <button id="btnFind" class="btn primary big">🔍 Find a speaking partner</button>
+      <p class="muted small">You'll be matched with another learner, usually within 30 seconds. Both of you get equal time as candidate and examiner.</p>
+    </div>
+
+    <div class="card narrow">
+      <h2>Your progress</h2>
+      <div class="stats">
+        <div class="stat"><div class="stat-num" id="statSessions">0</div><div class="stat-label">sessions</div></div>
+        <div class="stat"><div class="stat-num" id="statMinutes">0</div><div class="stat-label">minutes spoken</div></div>
+        <div class="stat"><div class="stat-num" id="statStreak">0</div><div class="stat-label">day streak</div></div>
+      </div>
+      <h3>Recent sessions</h3>
+      <div id="historyList" class="history"><p class="muted">No sessions yet. Your first partner is waiting!</p></div>
+      <button id="btnEditProfile" class="btn ghost small">Edit profile</button>
+    </div>
+  </section>
+
+  <!-- SEARCHING -->
+  <section id="view-searching" class="view hidden">
+    <div class="card narrow center">
+      <div class="spinner"></div>
+      <h1>Finding your partner…</h1>
+      <p class="muted" id="searchStatus">Looking for a learner near your level.</p>
+      <button id="btnCancelSearch" class="btn ghost">Cancel</button>
+    </div>
+  </section>
+
+  <!-- MATCHED -->
+  <section id="view-matched" class="view hidden">
+    <div class="card narrow center">
+      <div class="avatar-lg" id="matchAvatar">🙂</div>
+      <h1 id="matchName">Partner found!</h1>
+      <p class="muted" id="matchMeta"></p>
+      <div class="session-plan" id="matchPlan"></div>
+      <p class="muted small">Camera and mic turn on next. You can go audio-only anytime.</p>
+      <button id="btnJoinCall" class="btn primary big">Join session</button>
+      <button id="btnSkipPartner" class="btn ghost">Skip this partner</button>
+    </div>
+  </section>
+
+  <!-- CALL / SESSION -->
+  <section id="view-call" class="view hidden">
+    <div class="videos">
+      <div class="video-tile">
+        <video id="remoteVideo" autoplay playsinline></video>
+        <div class="video-label" id="remoteLabel">Partner</div>
+        <div class="avatar-fallback hidden" id="remoteAvatar">🙂</div>
+      </div>
+      <div class="video-tile self">
+        <video id="localVideo" autoplay playsinline muted></video>
+        <div class="video-label">You</div>
+      </div>
+    </div>
+
+    <div class="card stage-panel">
+      <div class="stage-top">
+        <div>
+          <div class="stage-kicker" id="stageKicker">Session</div>
+          <h2 id="stageTitle">Getting ready…</h2>
+          <div class="role-pill" id="rolePill">—</div>
+        </div>
+        <div class="timer" id="timer">--:--</div>
+      </div>
+      <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+      <div id="promptCard" class="prompt-card"></div>
+      <div id="liveTranscript" class="transcript hidden"></div>
+      <div class="stage-actions">
+        <button id="btnNextStage" class="btn primary hidden">Next stage →</button>
+        <span class="muted small" id="stageHint"></span>
+      </div>
+    </div>
+
+    <div class="call-controls">
+      <button id="btnMute" class="ctl" title="Mute">🎤</button>
+      <button id="btnCamera" class="ctl" title="Camera">📷</button>
+      <button id="btnReport" class="ctl danger" title="Report">🚩</button>
+      <button id="btnLeave" class="ctl leave" title="Leave">📞</button>
+    </div>
+  </section>
+
+  <!-- REVIEW -->
+  <section id="view-review" class="view hidden">
+    <div class="card narrow">
+      <h1>Session review</h1>
+      <p class="muted" id="reviewSummary"></p>
+      <div id="feedbackBox"></div>
+      <h2>Rate your partner</h2>
+      <div class="rate-row">
+        <span>Was their answer clear?</span>
+        <div class="seg" id="rateClear">
+          <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <div class="rate-row">
+        <span>Did they develop their ideas?</span>
+        <div class="seg" id="rateDevelop">
+          <button data-v="1">1</button><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button><button data-v="5">5</button>
+        </div>
+      </div>
+      <label>One phrase they used well
+        <input id="ratePhrase" type="text" maxlength="120" placeholder="e.g. &quot;in my humble opinion&quot;">
+      </label>
+      <div class="row">
+        <button id="btnSendRating" class="btn primary">Send rating</button>
+        <button id="btnNewSession" class="btn ghost">Practice again</button>
+      </div>
+      <p class="muted small" id="partnerRatingNote"></p>
+    </div>
+  </section>
+
+</main>
+
+<!-- REPORT MODAL -->
+<div id="reportModal" class="modal hidden">
+  <div class="modal-card">
+    <h2>Report partner</h2>
+    <p class="muted small">Reporting ends the call immediately and blocks this person from matching with you again.</p>
+    <div class="report-reasons">
+      <button data-r="Inappropriate behavior">Inappropriate behavior</button>
+      <button data-r="Harassment or hate speech">Harassment / hate speech</button>
+      <button data-r="Nudity or sexual content">Nudity / sexual content</button>
+      <button data-r="Spam or scam">Spam / scam</button>
+      <button data-r="Underage user">Underage user</button>
+    </div>
+    <button id="btnReportCancel" class="btn ghost">Cancel</button>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="prompts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
