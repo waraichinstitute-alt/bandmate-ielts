@@ -3,23 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BandMate — The daily speaking gym for IELTS</title>
+<meta name="description" content="SpeakReady — Timed IELTS Speaking practice, clear feedback, and a focused plan for what to say better next time.">
+<title>SpeakReady — Speak with confidence. Improve with evidence.</title>
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-route="home">
 
 <header class="topbar">
-  <div class="brand">🎙️ BandMate</div>
-  <div class="topbar-right"><span id="streakBadge" class="streak-badge hidden">🔥 <span id="streakCount">0</span></span></div>
+  <a class="brand" href="#/home" aria-label="SpeakReady home">🎙️ <span id="brandWord">SpeakReady</span></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#/practice">Practice</a>
+    <a href="#/solo?mode=full">Mock test</a>
+    <a href="#/questions">Question bank</a>
+    <a href="#/learn">Learn</a>
+    <a href="#/progress">Progress</a>
+    <a href="#/pricing">Pricing</a>
+  </nav>
+  <div class="topbar-right">
+    <span id="streakBadge" class="streak-badge hidden">🔥 <span id="streakCount">0</span></span>
+    <a href="#/practice" class="btn primary small nav-cta">Start free</a>
+  </div>
 </header>
 
 <main id="app">
 
-  <!-- PROFILE SETUP -->
-  <section id="view-setup" class="view">
+  <!-- ============ HOME ============ -->
+  <section id="view-home" class="view hidden">
+    <div class="wrap">
+      <div class="hero">
+        <div>
+          <span class="eyebrow">IELTS Speaking practice, built for real progress</span>
+          <h1>Speak with confidence. Improve with evidence.</h1>
+          <p class="lede">Timed IELTS Speaking practice, clear feedback, and a focused plan for what to say better next time.</p>
+          <div class="hero-ctas">
+            <a href="#/practice" class="btn primary big" style="width:auto">Try a free practice</a>
+            <a href="#home-how" class="btn big" style="width:auto" data-scroll>See how it works</a>
+          </div>
+          <p class="microcopy">No card required • Your recording stays private</p>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="mock-cue">
+            <div class="mock-q">Describe a skill you would like to learn.</div>
+            <ul><li>What the skill is</li><li>Why you want to learn it</li><li>How it would help you</li></ul>
+          </div>
+          <div class="mock-row">
+            <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="mock-timer">01:38</div>
+          </div>
+          <div class="mock-fb">
+            <div><b>Fluency</b>6.0–6.5</div>
+            <div><b>Vocabulary</b>6.0–6.5</div>
+            <div><b>Grammar</b>self-check</div>
+            <div><b>Pronunciation</b>self-check</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trust-strip">
+        <span>Designed around the 3-part IELTS Speaking format</span>
+        <span>Feedback across 4 assessment criteria</span>
+        <span>Independent practice tool</span>
+      </div>
+
+      <div class="section" id="home-how">
+        <h2>How it works</h2>
+        <p class="sub">One clear loop: practise like the test, understand your answer, retry with focus.</p>
+        <div class="steps">
+          <div class="step"><div class="n">1</div><h3>Choose</h3><p>Pick a quick drill, a full mock, or a live partner call.</p></div>
+          <div class="step"><div class="n">2</div><h3>Speak</h3><p>Answer under realistic timing — just like the real test.</p></div>
+          <div class="step"><div class="n">3</div><h3>Understand</h3><p>See your transcript with a practice estimate and evidence.</p></div>
+          <div class="step"><div class="n">4</div><h3>Retry</h3><p>Get one priority fix and practise it immediately.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Choose your practice path</h2>
+        <p class="sub">Three ways to practise. Same goal: measurable progress.</p>
+        <div class="path-cards">
+          <div class="path-card featured">
+            <span class="live-badge">● LIVE</span>
+            <h3>Practice with a partner</h3>
+            <p>A real video call with another learner. Take turns as candidate and examiner through Parts 1, 2 and 3.</p>
+            <div class="meta">~20 min • matched by level • free</div>
+            <a href="#/partner" class="btn primary">Find a partner</a>
+          </div>
+          <div class="path-card">
+            <h3>Quick solo drill</h3>
+            <p>Answer timed IELTS questions on your own and get an on-device practice estimate in minutes.</p>
+            <div class="meta">3–5 min • Parts 1, 2 or 3</div>
+            <a href="#/solo" class="btn">Start a drill</a>
+          </div>
+          <div class="path-card">
+            <h3>Full mock test</h3>
+            <p>All three Speaking parts under realistic timing, with full feedback at the end.</p>
+            <div class="meta">11–14 min • exam-style</div>
+            <a href="#/solo?mode=full" class="btn">Start full mock</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="partner-band">
+        <div>
+          <h2>Learn faster with a real person</h2>
+          <p>Speaking is a conversation. Get matched with a learner near your level for a live video call — free, no account needed, and your video never passes through our servers.</p>
+        </div>
+        <a href="#/partner" class="btn primary big">Practice with a partner</a>
+      </div>
+
+      <div class="section">
+        <h2>Feedback in the four real criteria</h2>
+        <p class="sub">The same four areas an examiner assesses — explained in plain language, with evidence from your own answers.</p>
+        <div class="criteria-grid" id="homeCriteria"></div>
+      </div>
+
+      <div class="section">
+        <h2>What feedback looks like</h2>
+        <p class="sub">Illustrative example — every real report is built from your own transcript.</p>
+        <div class="demo">
+          <span class="tag">Example transcript excerpt</span>
+          <blockquote>“<mark>Um</mark>, I think technology is… <mark>uh</mark> very important because, <mark>like</mark>, everyone uses phones every day…”</blockquote>
+          <p class="fix">→ Priority fix: replace “um / uh” with a short silent pause — it sounds more confident. Retry the same question and compare your filler count.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Explore speaking topics</h2>
+        <p class="sub">Original practice questions across every part of the test.</p>
+        <div class="topic-grid" id="homeTopics"></div>
+        <p style="text-align:center;margin-top:16px"><a href="#/questions" class="btn">Browse the question bank</a></p>
+      </div>
+
+      <div class="section">
+        <h2>Simple, honest pricing</h2>
+        <p class="sub">Core practice is free. No card, no trial trap.</p>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <h3>Free</h3>
+            <div class="price">$0</div>
+            <ul>
+              <li>Unlimited partner video calls</li>
+              <li>Solo drills &amp; full mock tests</li>
+              <li>On-device practice estimates</li>
+              <li>Progress, streaks &amp; history</li>
+            </ul>
+            <a href="#/practice" class="btn primary big">Start free</a>
+          </div>
+          <div class="price-card pro">
+            <h3>Pro <span class="muted small">— coming soon</span></h3>
+            <div class="price">TBA</div>
+            <ul>
+              <li>Detailed feedback history &amp; exports</li>
+              <li>Personal review deck for your errors</li>
+              <li>Priority matching for partner calls</li>
+            </ul>
+            <a href="#/pricing" class="btn big">See details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Questions, answered</h2>
+        <div class="faq">
+          <details><summary>Is this an official IELTS product?</summary><p>No. <span data-brand>SpeakReady</span> is an independent preparation service — not affiliated with or endorsed by IELTS partners. We teach the public test format; only a qualified examiner can award an official band score.</p></details>
+          <details><summary>How does the practice estimate work?</summary><p>Your recording is analysed on your own device: speaking time, pace, pauses, filler words and answer length. That produces a practice range (like 6.0–6.5), never a single exact score — and never an official result.</p></details>
+          <details><summary>Will you judge my accent?</summary><p>Never. We only care whether your speech is easy to understand. Pronunciation feedback is conservative and accent is never penalised.</p></details>
+          <details><summary>Where does my recording go?</summary><p>Solo practice recordings never leave your device — analysis happens in your browser. Partner calls are direct, encrypted phone-to-phone video. You can delete any recording or all your data at any time.</p></details>
+          <details><summary>Does it cover Academic and General Training?</summary><p>Yes — the Speaking test format is identical for both.</p></details>
+          <details><summary>Can I cancel?</summary><p>There is nothing to cancel. The core product is free with no card and no subscription.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRACTICE PICKER ============ -->
+  <section id="view-practice" class="view hidden">
+    <div class="wrap-narrow" style="margin:0 auto">
+      <span class="eyebrow">Practice</span>
+      <h1>How do you want to practise today?</h1>
+      <p class="muted">One clear path per session. You can switch any time.</p>
+      <div class="pick-grid" style="grid-template-columns:1fr">
+        <div class="path-card featured">
+          <span class="live-badge">● LIVE</span>
+          <h3>Practice with a partner</h3>
+          <p>A real video call with another learner near your level. You take turns as candidate and examiner through a full session — our most loved way to practise.</p>
+          <div class="meta">~20 min • matched by level • free • no account</div>
+          <a href="#/partner" class="btn primary big">Find a speaking partner</a>
+        </div>
+        <div class="path-card">
+          <h3>Solo drill</h3>
+          <p>Answer timed IELTS questions on your own. Get a transcript, an on-device practice estimate, and one priority fix.</p>
+          <div class="meta">3–5 min • Part 1, 2 or 3</div>
+          <a href="#/solo" class="btn big">Start a solo drill</a>
+        </div>
+        <div class="path-card">
+          <h3>Full mock test</h3>
+          <p>Parts 1, 2 and 3 back-to-back under realistic timing — the closest thing to test day, solo.</p>
+          <div class="meta">11–14 min • exam-style timing</div>
+          <a href="#/solo?mode=full" class="btn big">Start full mock</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOLO SETUP ============ -->
+  <section id="view-solo" class="view hidden">
+    <div class="wrap-narrow" style="margin:0 auto">
+      <span class="eyebrow">Solo practice</span>
+      <h1>Pick your drill</h1>
+      <p class="muted">Timed, realistic, and analysed on your device. Nothing is uploaded.</p>
+      <div class="pick-grid" id="soloModes" style="grid-template-columns:1fr"></div>
+    </div>
+  </section>
+
+  <!-- ============ MIC CHECK ============ -->
+  <section id="view-mic" class="view hidden">
+    <div class="wrap-narrow" style="margin:0 auto">
+      <span class="eyebrow">Before you start</span>
+      <h1>Check your microphone</h1>
+      <p>We use your microphone only to record this practice answer. You can delete it anytime.</p>
+      <div class="mic-steps">
+        <div class="card">
+          <h2 style="margin-top:0">1. Enable the microphone</h2>
+          <p class="muted small">Your browser will ask for permission. Nothing is recorded until you press “Start practice”.</p>
+          <button id="btnMicEnable" class="btn primary">Enable microphone</button>
+          <div id="micMeterWrap" class="hidden">
+            <p class="small" style="margin-bottom:4px"><strong>Speak now</strong> — you should see the bars move:</p>
+            <div class="meter" id="micMeter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="small" id="micStatus" role="status"></p>
+            <label id="micDeviceWrap" class="hidden">Microphone
+              <select id="selMicDevice"></select>
+            </label>
+          </div>
+          <p id="micError" class="hidden" style="color:var(--coral);font-weight:600"></p>
+        </div>
+        <div class="card">
+          <h2 style="margin-top:0">2. Start when you're ready</h2>
+          <div id="srNote" class="notice"></div>
+          <button id="btnMicStart" class="btn primary big" disabled>Start practice</button>
+          <p class="muted small">Tip: find a quiet spot and hold your phone like you would on a call.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRACTICE ROOM ============ -->
+  <section id="view-room" class="view hidden">
+    <div class="wrap-narrow" style="margin:0 auto">
+      <div class="room-top">
+        <button id="btnRoomExit" class="btn small ghost">✕ Exit</button>
+        <span class="room-stage" id="roomStage">Part 1 of 3</span>
+        <span class="spacer"></span>
+        <span class="room-timer" id="roomTimer" role="timer" aria-live="off">--:--</span>
+        <button id="btnRoomHelp" class="btn small ghost" aria-label="Help">?</button>
+      </div>
+      <div id="roomBody"></div>
+      <div class="room-actions" id="roomActions"></div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section id="view-results" class="view hidden">
+    <div class="wrap-narrow" style="margin:0 auto" id="resultsBody"></div>
+  </section>
+
+  <!-- ============ QUESTION BANK ============ -->
+  <section id="view-questions" class="view hidden">
+    <div class="wrap" style="max-width:1080px;margin:0 auto">
+      <span class="eyebrow">Question bank</span>
+      <h1>Practise real-style questions</h1>
+      <p class="muted">Original practice questions written for <span data-brand>SpeakReady</span> — not copied from any test.</p>
+      <div class="filters">
+        <label style="max-width:320px">Part
+          <select id="qPart">
+            <option value="all">All parts</option>
+            <option value="1">Part 1 — Interview</option>
+            <option value="2">Part 2 — Long turn</option>
+            <option value="3">Part 3 — Discussion</option>
+          </select>
+        </label>
+        <div class="chip-row" id="qTopics" role="group" aria-label="Filter by topic"></div>
+      </div>
+      <div id="qList"></div>
+    </div>
+  </section>
+
+  <!-- ============ PROGRESS ============ -->
+  <section id="view-progress" class="view hidden">
+    <div class="wrap-narrow" style="margin:0 auto" id="progressBody"></div>
+  </section>
+
+  <!-- ============ LEARN ============ -->
+  <section id="view-learn" class="view hidden">
+    <div class="wrap-narrow" style="margin:0 auto">
+      <span class="eyebrow">Learn</span>
+      <h1>Understand the four criteria</h1>
+      <p class="muted">Plain-language guides to what examiners listen for — and how <span data-brand>SpeakReady</span> helps you improve each one.</p>
+      <div id="learnCriteria"></div>
+      <div class="card">
+        <h2 style="margin-top:0">How practice estimates work</h2>
+        <ul style="color:var(--muted);padding-left:18px;margin:0">
+          <li>We show a <strong>range</strong> (e.g. 6.0–6.5), never a single exact band.</li>
+          <li>Each estimate carries a confidence level: low, medium or high.</li>
+          <li>Signals come only from on-device measurements of your recording.</li>
+          <li>This is a practice estimate — not an official IELTS result. Only a qualified IELTS examiner can award an official band score.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section id="view-pricing" class="view hidden">
+    <div class="wrap-narrow" style="margin:0 auto">
+      <span class="eyebrow">Pricing</span>
+      <h1>Simple, honest pricing</h1>
+      <p class="muted">No card required. We will never paywall deleting your data or a plain explanation of your feedback.</p>
+      <div class="pricing-grid" style="grid-template-columns:1fr">
+        <div class="price-card">
+          <h3>Free</h3>
+          <div class="price">$0 <span class="small muted">forever</span></div>
+          <ul>
+            <li>Unlimited practice with a partner (live video calls)</li>
+            <li>Unlimited solo drills &amp; full mock tests</li>
+            <li>On-device practice estimates &amp; transcripts</li>
+            <li>Progress, streaks &amp; history</li>
+          </ul>
+          <a href="#/practice" class="btn primary big">Start free</a>
+        </div>
+        <div class="price-card pro">
+          <h3>Pro <span class="muted small">— coming soon</span></h3>
+          <div class="price">TBA</div>
+          <ul>
+            <li>Detailed feedback history &amp; exports</li>
+            <li>Personal review deck built from your errors</li>
+            <li>Priority matching for partner calls</li>
+          </ul>
+          <button class="btn big" id="btnProNotify">Notify me at launch</button>
+          <p class="muted small">No checkout yet — there is nothing to buy today.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRIVACY ============ -->
+  <section id="view-privacy" class="view hidden">
+    <div class="wrap-narrow" style="margin:0 auto">
+      <span class="eyebrow">Privacy</span>
+      <h1>Your voice stays yours</h1>
+      <div class="card">
+        <ul style="padding-left:18px;margin:0;display:grid;gap:10px">
+          <li><strong>Microphone:</strong> we ask for it only to record your practice answers. We use your microphone only to record this practice answer. You can delete it anytime.</li>
+          <li><strong>Solo practice:</strong> recordings and transcripts never leave your device. Analysis runs entirely in your browser.</li>
+          <li><strong>Partner calls:</strong> video and audio travel directly between the two phones over an encrypted connection. Our server only introduces you — it never sees or hears the call.</li>
+          <li><strong>Storage:</strong> your profile, progress and practice history live in this browser's local storage. There is no account and no cloud copy.</li>
+          <li><strong>Deletion:</strong> delete any recording from its results page, or wipe everything via Progress → Delete all my data.</li>
+          <li><strong>Analytics:</strong> we don't run third-party analytics. What you do here stays here.</li>
+        </ul>
+      </div>
+      <p class="muted small"><span data-brand>SpeakReady</span> is an independent preparation service — not affiliated with or endorsed by IELTS partners.</p>
+    </div>
+  </section>
+
+  <!-- ============ TERMS ============ -->
+  <section id="view-terms" class="view hidden">
+    <div class="wrap-narrow" style="margin:0 auto">
+      <span class="eyebrow">Terms</span>
+      <h1>Terms of use</h1>
+      <div class="card">
+        <div style="display:grid;gap:12px;font-size:15px">
+          <p><strong>1. What this is.</strong> <span data-brand>SpeakReady</span> is an independent IELTS Speaking practice tool. It is not affiliated with, endorsed by, or connected to the IELTS partners, and nothing here is an official test or official score.</p>
+          <p><strong>2. Practice estimates.</strong> Any band range shown is a practice estimate based on on-device measurements of your recording. It is not an official IELTS result, and only a qualified IELTS examiner can award an official band score.</p>
+          <p><strong>3. Age.</strong> You must be 18 or older to use partner video calls.</p>
+          <p><strong>4. Be kind.</strong> Partner calls are with real learners. Harassment, hate speech, nudity or spam will get you blocked. Use Report any time — it ends the call immediately.</p>
+          <p><strong>5. Your data.</strong> Solo recordings stay on your device; you can delete them any time. See the Privacy page for details.</p>
+          <p><strong>6. No guarantees.</strong> We can't promise a particular band score — only useful practice. The service is provided as-is.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARTNER FLOW (legacy — element IDs unchanged) ============ -->
+  <section id="view-setup" class="view hidden">
     <div class="card narrow">
       <h1>Set up your profile</h1>
-      <p class="muted">This is stored only in your browser for now — no account needed for the MVP.</p>
+      <p class="muted">This is stored only in your browser for now — no account needed.</p>
       <label>Your name
         <input id="inpName" type="text" maxlength="40" placeholder="e.g. Simran">
       </label>
@@ -35,7 +401,6 @@
     </div>
   </section>
 
-  <!-- LOBBY -->
   <section id="view-lobby" class="view hidden">
     <div class="card narrow">
       <h1 id="lobbyHello">Ready to practice?</h1>
@@ -76,7 +441,6 @@
     </div>
   </section>
 
-  <!-- SEARCHING -->
   <section id="view-searching" class="view hidden">
     <div class="card narrow center">
       <div class="spinner"></div>
@@ -86,7 +450,6 @@
     </div>
   </section>
 
-  <!-- MATCHED -->
   <section id="view-matched" class="view hidden">
     <div class="card narrow center">
       <div class="avatar-lg" id="matchAvatar">🙂</div>
@@ -99,7 +462,6 @@
     </div>
   </section>
 
-  <!-- CALL / SESSION -->
   <section id="view-call" class="view hidden">
     <div class="videos">
       <div class="video-tile">
@@ -139,7 +501,6 @@
     </div>
   </section>
 
-  <!-- REVIEW -->
   <section id="view-review" class="view hidden">
     <div class="card narrow">
       <h1>Session review</h1>
@@ -171,6 +532,45 @@
 
 </main>
 
+<nav class="mobile-nav" aria-label="Mobile">
+  <a href="#/home"><span class="ic">🏠</span><span>Home</span></a>
+  <a href="#/practice"><span class="ic">🎯</span><span>Practise</span></a>
+  <a href="#/solo?mode=full"><span class="ic">⏱️</span><span>Mock</span></a>
+  <a href="#/progress"><span class="ic">📈</span><span>Progress</span></a>
+  <a href="#/partner"><span class="ic">👤</span><span>Partner</span></a>
+</nav>
+
+<footer class="site-footer">
+  <div class="foot-in">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">🎙️ <span data-brand>SpeakReady</span></div>
+        <p class="small" style="margin:0">Practise like the test. Know exactly what to improve next.</p>
+      </div>
+      <div>
+        <h3>Practice</h3>
+        <a href="#/practice">Choose a path</a>
+        <a href="#/partner">Practice with a partner</a>
+        <a href="#/solo">Solo drill</a>
+        <a href="#/solo?mode=full">Full mock test</a>
+      </div>
+      <div>
+        <h3>Resources</h3>
+        <a href="#/questions">Question bank</a>
+        <a href="#/learn">Learn the criteria</a>
+        <a href="#/progress">Your progress</a>
+        <a href="#/pricing">Pricing</a>
+      </div>
+      <div>
+        <h3>Trust</h3>
+        <a href="#/privacy">Privacy</a>
+        <a href="#/terms">Terms</a>
+      </div>
+    </div>
+    <p class="foot-note">© 2026 <span data-brand>SpeakReady</span>. Independent preparation service — not affiliated with or endorsed by IELTS partners.</p>
+  </div>
+</footer>
+
 <!-- REPORT MODAL -->
 <div id="reportModal" class="modal hidden">
   <div class="modal-card">
@@ -187,9 +587,12 @@
   </div>
 </div>
 
-<div id="toast" class="toast hidden"></div>
+<div id="toast" class="toast hidden" role="status"></div>
 
 <script src="prompts.js"></script>
 <script src="app.js"></script>
+<script src="brand.js"></script>
+<script src="analysis.js"></script>
+<script src="site.js"></script>
 </body>
 </html>

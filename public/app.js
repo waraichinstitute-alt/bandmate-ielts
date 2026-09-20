@@ -599,5 +599,17 @@
     }
   };
 
+  /* ============ Bridge for the site router (additive; video-call logic above untouched) ============ */
+  window.BM = {
+    show: show,
+    hasProfile: function () { return !!store.profile; },
+    busy: function () { return !!(session || peerId); },
+    leave: function () {
+      if (session) { $('btnLeave').click(); }
+      else if (!$('view-searching').classList.contains('hidden')) { $('btnCancelSearch').click(); }
+      else if (peerId) { send('leave'); peerId = null; partner = null; show('view-lobby'); }
+    }
+  };
+
   boot();
 })();
